@@ -1,0 +1,1 @@
+# MEAN Hackathon - NoteMinder

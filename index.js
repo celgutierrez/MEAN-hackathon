@@ -13,7 +13,7 @@ var app = express();
 // mongoose models and connection
 var mongoose = require('mongoose');
 var User = require('./models/user');
-mongoose.connect('mongodb://localhost/authboilerplate'); //change this DB
+mongoose.connect('mongodb://localhost/noteminder'); //change this DB
 
 // decode POST data in JSON and URL encoded formats
 app.use(bodyParser.json());
@@ -22,6 +22,7 @@ app.use(express.static(path.join(__dirname, 'public')));
 app.use(require('morgan')('dev'));
 
 // Replace the above routes with the following
+app.use('/api/notes', expressJWT({ secret: secret }), require('./controllers/notes'));
 app.use('/api/users', expressJWT({ secret: secret }).unless({
     path: [{ url: '/api/users', methods: ['POST'] }]
 }), require('./controllers/users'));
